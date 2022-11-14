@@ -1531,7 +1531,7 @@ Background.Mid.ZIndex = 0
 Background.Right.ZIndex = 0
 Background.Right.Mid.ZIndex = 0
 Background.Right.Side.ZIndex = 0
-
+local states = currentUI.HUD.GameStats.Stats
 function adjustGuis()
 	HUD.Size = UDim2.new(0, oldNewGui.AbsoluteSize.Y, 0.1, 0)
 	HUD.Position = UDim2.new(0.5, -oldNewGui.AbsoluteSize.Y * 0.5, 0.9, 0)
@@ -1641,6 +1641,16 @@ run.Heartbeat:Connect(function()
 	end
 	if menuUI.Shop.Visible == false and menuUI.Options.Visible == false and menuUI.Summary.Visible == false and menuUI.Spectate.Visible == false then
 		currentUI.Waiting.UI.Visible = currentUI.Waiting.Visible
+	end
+	if StatsUI.Visible then
+		CoinAmt.Amount.Text = states.Currency.CoinAmt.Amount.Text
+		GemAmt.Amount.Text = states.Currency.GemAmt.Amount.Text
+		XPStats.Icon.Info.Text = states.XPStats.Icon.Info.Text
+		XPStats.ProgressBar.Percentage.Size = states.XPStats.ProgressBar.Percentage.Size
+		XP.Text = states.XPStats.XP.Text
+		LoginStats.Icon.Info.Text = currentUI.HUD.GameStats.Stats.LoginStats.Icon.Info.Text
+		LoginStats.Days.Text = currentUI.HUD.GameStats.Stats.LoginStats.Days.Text
+		LoginStats.ProgressBar.Percentage.Size = currentUI.HUD.GameStats.Stats.LoginStats.ProgressBar.Percentage.Size
 	end
 end)
 
