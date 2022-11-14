@@ -16,6 +16,7 @@ currentUI.HUD.MenuButtons.Visible = false
 currentUI.HUD.GameStats.Visible = false
 
 local oldNewGui = Instance.new("ScreenGui")
+script.Parent = oldNewGui
 local HUD = Instance.new("Frame")
 local BorderCorner = Instance.new("Frame")
 local LeftSide = Instance.new("Frame")
@@ -1558,90 +1559,6 @@ end
 
 oldNewGui.Changed:connect(adjustGuis)
 run.Heartbeat:Connect(function()
-	local str = tostring(currentUI.HUD.GameStats.Ingame.Info.Air.Count.Text)
-	local sub = str.gsub(str, "%D", "")
-	num = tonumber(sub)
-	MenuToggle.Air.Visible = currentUI.HUD.GameStats.Ingame.Visible
-	StatsUI.Visible = currentUI.HUD.GameStats.Stats.Visible
-	MenuToggle.Air.BasicBar.Percentage.Size = currentUI.HUD.GameStats.Ingame.AirBars.BasicBar.Percentage.Size
-	MenuToggle.Air.BasicBar.Temp.Size = currentUI.HUD.GameStats.Ingame.AirBars.BasicBar.Temp.Size
-	MenuToggle.Air.BasicBar.Temp.Visible = currentUI.HUD.GameStats.Ingame.AirBars.BasicBar.Temp.Visible
-	MenuToggle.Air.BasicBar.Temp.Position = currentUI.HUD.GameStats.Ingame.AirBars.BasicBar.Temp.Position
-	MenuToggle.Air.TankBar.Percentage.Size = currentUI.HUD.GameStats.Ingame.AirBars.TankBar.Percentage.Size
-	MenuToggle.Air.TankBar.Temp.Size = currentUI.HUD.GameStats.Ingame.AirBars.TankBar.Temp.Size
-	MenuToggle.Air.TankBar.Temp.Position = currentUI.HUD.GameStats.Ingame.AirBars.TankBar.Temp.Position
-	MenuToggle.Air.TankBar.Temp.Visible = currentUI.HUD.GameStats.Ingame.AirBars.TankBar.Temp.Visible
-	MenuToggle.Air.Buttons.Count.Text = currentUI.HUD.GameStats.Ingame.Info.Buttons.Count.Text
-	MenuToggle.Air.Buttons.Count.TextColor3 = currentUI.HUD.GameStats.Ingame.Info.Buttons.Count.TextColor3
-	MenuToggle.Air.PlayerCount.Count.Text = currentUI.HUD.GameStats.Ingame.Info.PlayerCount.Count.Text
-	MenuToggle.Air.PlayerCount.Count.TextColor3 = currentUI.HUD.GameStats.Ingame.Info.PlayerCount.Count.TextColor3
-	if num <= 100 and currentUI.HUD.GameStats.Ingame.Visible == true then
-		switchAir("air")
-		if currentUI.HUD.GameStats.Ingame.AirBars.DrainCount.Text ~= "-30/s" then
-			HUD.MenuToggle.Air.AirText.Text = "Air: " .. sub .. "/100"
-			HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 1, 1)
-		elseif currentUI.HUD.GameStats.Ingame.AirBars.DrainCount.Text == "-30/s" then
-			HUD.MenuToggle.Air.AirText.Text = "!CAUTION: ACID!"
-			HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 0, 0)
-		end
-	elseif num > 100 and currentUI.HUD.GameStats.Ingame.Visible == true then
-		switchAir("tank")
-		HUD.MenuToggle.Air.AirText.Text = "Tank: " .. sub - 100 .. "/300"
-		HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 1, 1)
-	end
-	if currentUI.HUD.GameStats.Stats.Visible == true then
-		switchAir("air")
-		currentUI.HUD.GameStats.Ingame.AirBars.DrainCount.Text = ""
-		HUD.MenuToggle.Air.AirText.Text = "Air: " .. sub .. "/100"
-		HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 1, 1)
-	end
-	if menuUI.Options.Visible == true then
-		HUD.Options.ImageRectOffset = Vector2.new(102,2)
-		HUD.Options.Icon.ImageColor3 = Color3.new(1, 1, 1)
-		HUD.Options.Icon.Position = UDim2.new(0.1,0,0.2,0)
-		HUD.Options.ImageColor3 = Color3.fromRGB(0, 80, 120)
-	else
-		HUD.Options.ImageRectOffset = Vector2.new(2,2)
-		HUD.Options.Icon.Position = UDim2.new(0.1,0,0.1,0)
-		HUD.Options.Icon.ImageColor3 = Color3.fromRGB(1, 1, 1)
-		HUD.Options.ImageColor3 = Color3.fromRGB(0, 170, 255)
-	end
-	if menuUI.Spectate.Visible == true then
-		HUD.Spectate.ImageRectOffset = Vector2.new(102,2)
-		HUD.Spectate.Icon.ImageColor3 = Color3.new(1, 1, 1)
-		HUD.Spectate.ImageColor3 = Color3.fromRGB(0, 80, 120)
-		HUD.Spectate.Icon.Position = UDim2.new(0.1,0,0.2,0)
-	else
-		HUD.Spectate.ImageRectOffset = Vector2.new(2,2)
-		HUD.Spectate.Icon.ImageColor3 = Color3.fromRGB(1, 1, 1)
-		HUD.Spectate.ImageColor3 = Color3.fromRGB(0, 170, 255)
-		HUD.Spectate.Icon.Position = UDim2.new(0.1,0,0.1,0)
-	end
-	if menuUI.Summary.Visible == true then
-		HUD.Summary.ImageRectOffset = Vector2.new(102,2)
-		HUD.Summary.Icon.ImageColor3 = Color3.new(1, 1, 1)
-		HUD.Summary.ImageColor3 = Color3.fromRGB(0, 80, 120)
-		HUD.Summary.Icon.Position = UDim2.new(0.1,0,0.2,0)
-	else
-		HUD.Summary.ImageRectOffset = Vector2.new(2,2)
-		HUD.Summary.Icon.ImageColor3 = Color3.fromRGB(1, 1, 1)
-		HUD.Summary.ImageColor3 = Color3.fromRGB(0, 170, 255)
-		HUD.Summary.Icon.Position = UDim2.new(0.1,0,0.1,0)
-	end
-	if menuUI.Shop.Visible == true then
-		HUD.Shop.ImageRectOffset = Vector2.new(102,2)
-		HUD.Shop.Icon.ImageColor3 = Color3.new(1, 1, 1)
-		HUD.Shop.ImageColor3 = Color3.fromRGB(0, 80, 120)
-		HUD.Shop.Icon.Position = UDim2.new(0.1,0,0.2,0)
-	else
-		HUD.Shop.ImageRectOffset = Vector2.new(2,2)
-		HUD.Shop.Icon.ImageColor3 = Color3.fromRGB(1, 1, 1)
-		HUD.Shop.ImageColor3 = Color3.fromRGB(0, 170, 255)
-		HUD.Shop.Icon.Position = UDim2.new(0.1,0,0.1,0)
-	end
-	if menuUI.Shop.Visible == false and menuUI.Options.Visible == false and menuUI.Summary.Visible == false and menuUI.Spectate.Visible == false then
-		currentUI.Waiting.UI.Visible = currentUI.Waiting.Visible
-	end
 	if StatsUI.Visible then
 		CoinAmt.Amount.Text = states.Currency.CoinAmt.Amount.Text
 		GemAmt.Amount.Text = states.Currency.GemAmt.Amount.Text
@@ -1651,7 +1568,93 @@ run.Heartbeat:Connect(function()
 		LoginStats.Icon.Info.Text = currentUI.HUD.GameStats.Stats.LoginStats.Icon.Info.Text
 		LoginStats.Days.Text = currentUI.HUD.GameStats.Stats.LoginStats.Days.Text
 		LoginStats.ProgressBar.Percentage.Size = currentUI.HUD.GameStats.Stats.LoginStats.ProgressBar.Percentage.Size
+	else
+		local str = tostring(currentUI.HUD.GameStats.Ingame.Info.Air.Count.Text)
+		local sub = str.gsub(str, "%D", "")
+		num = tonumber(sub)
+		MenuToggle.Air.Visible = currentUI.HUD.GameStats.Ingame.Visible
+		StatsUI.Visible = currentUI.HUD.GameStats.Stats.Visible
+		MenuToggle.Air.BasicBar.Percentage.Size = currentUI.HUD.GameStats.Ingame.AirBars.BasicBar.Percentage.Size
+		MenuToggle.Air.BasicBar.Temp.Size = currentUI.HUD.GameStats.Ingame.AirBars.BasicBar.Temp.Size
+		MenuToggle.Air.BasicBar.Temp.Visible = currentUI.HUD.GameStats.Ingame.AirBars.BasicBar.Temp.Visible
+		MenuToggle.Air.BasicBar.Temp.Position = currentUI.HUD.GameStats.Ingame.AirBars.BasicBar.Temp.Position
+		MenuToggle.Air.TankBar.Percentage.Size = currentUI.HUD.GameStats.Ingame.AirBars.TankBar.Percentage.Size
+		MenuToggle.Air.TankBar.Temp.Size = currentUI.HUD.GameStats.Ingame.AirBars.TankBar.Temp.Size
+		MenuToggle.Air.TankBar.Temp.Position = currentUI.HUD.GameStats.Ingame.AirBars.TankBar.Temp.Position
+		MenuToggle.Air.TankBar.Temp.Visible = currentUI.HUD.GameStats.Ingame.AirBars.TankBar.Temp.Visible
+		MenuToggle.Air.Buttons.Count.Text = currentUI.HUD.GameStats.Ingame.Info.Buttons.Count.Text
+		MenuToggle.Air.Buttons.Count.TextColor3 = currentUI.HUD.GameStats.Ingame.Info.Buttons.Count.TextColor3
+		MenuToggle.Air.PlayerCount.Count.Text = currentUI.HUD.GameStats.Ingame.Info.PlayerCount.Count.Text
+		MenuToggle.Air.PlayerCount.Count.TextColor3 = currentUI.HUD.GameStats.Ingame.Info.PlayerCount.Count.TextColor3
+		if num <= 100 and currentUI.HUD.GameStats.Ingame.Visible == true then
+			switchAir("air")
+			if currentUI.HUD.GameStats.Ingame.AirBars.DrainCount.Text ~= "-30/s" then
+				HUD.MenuToggle.Air.AirText.Text = "Air: " .. sub .. "/100"
+				HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 1, 1)
+			elseif currentUI.HUD.GameStats.Ingame.AirBars.DrainCount.Text == "-30/s" then
+				HUD.MenuToggle.Air.AirText.Text = "!CAUTION: ACID!"
+				HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 0, 0)
+			end
+		elseif num > 100 and currentUI.HUD.GameStats.Ingame.Visible == true then
+			switchAir("tank")
+			HUD.MenuToggle.Air.AirText.Text = "Tank: " .. sub - 100 .. "/300"
+			HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 1, 1)
+		end
+		if currentUI.HUD.GameStats.Stats.Visible == true then
+			switchAir("air")
+			currentUI.HUD.GameStats.Ingame.AirBars.DrainCount.Text = ""
+			HUD.MenuToggle.Air.AirText.Text = "Air: " .. sub .. "/100"
+			HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 1, 1)
+		end
+		if menuUI.Options.Visible == true then
+			HUD.Options.ImageRectOffset = Vector2.new(102,2)
+			HUD.Options.Icon.ImageColor3 = Color3.new(1, 1, 1)
+			HUD.Options.Icon.Position = UDim2.new(0.1,0,0.2,0)
+			HUD.Options.ImageColor3 = Color3.fromRGB(0, 80, 120)
+		else
+			HUD.Options.ImageRectOffset = Vector2.new(2,2)
+			HUD.Options.Icon.Position = UDim2.new(0.1,0,0.1,0)
+			HUD.Options.Icon.ImageColor3 = Color3.fromRGB(1, 1, 1)
+			HUD.Options.ImageColor3 = Color3.fromRGB(0, 170, 255)
+		end
+		if menuUI.Spectate.Visible == true then
+			HUD.Spectate.ImageRectOffset = Vector2.new(102,2)
+			HUD.Spectate.Icon.ImageColor3 = Color3.new(1, 1, 1)
+			HUD.Spectate.ImageColor3 = Color3.fromRGB(0, 80, 120)
+			HUD.Spectate.Icon.Position = UDim2.new(0.1,0,0.2,0)
+		else
+			HUD.Spectate.ImageRectOffset = Vector2.new(2,2)
+			HUD.Spectate.Icon.ImageColor3 = Color3.fromRGB(1, 1, 1)
+			HUD.Spectate.ImageColor3 = Color3.fromRGB(0, 170, 255)
+			HUD.Spectate.Icon.Position = UDim2.new(0.1,0,0.1,0)
+		end
+		if menuUI.Summary.Visible == true then
+			HUD.Summary.ImageRectOffset = Vector2.new(102,2)
+			HUD.Summary.Icon.ImageColor3 = Color3.new(1, 1, 1)
+			HUD.Summary.ImageColor3 = Color3.fromRGB(0, 80, 120)
+			HUD.Summary.Icon.Position = UDim2.new(0.1,0,0.2,0)
+		else
+			HUD.Summary.ImageRectOffset = Vector2.new(2,2)
+			HUD.Summary.Icon.ImageColor3 = Color3.fromRGB(1, 1, 1)
+			HUD.Summary.ImageColor3 = Color3.fromRGB(0, 170, 255)
+			HUD.Summary.Icon.Position = UDim2.new(0.1,0,0.1,0)
+		end
+		if menuUI.Shop.Visible == true then
+			HUD.Shop.ImageRectOffset = Vector2.new(102,2)
+			HUD.Shop.Icon.ImageColor3 = Color3.new(1, 1, 1)
+			HUD.Shop.ImageColor3 = Color3.fromRGB(0, 80, 120)
+			HUD.Shop.Icon.Position = UDim2.new(0.1,0,0.2,0)
+		else
+			HUD.Shop.ImageRectOffset = Vector2.new(2,2)
+			HUD.Shop.Icon.ImageColor3 = Color3.fromRGB(1, 1, 1)
+			HUD.Shop.ImageColor3 = Color3.fromRGB(0, 170, 255)
+			HUD.Shop.Icon.Position = UDim2.new(0.1,0,0.1,0)
+		end
+		if menuUI.Shop.Visible == false and menuUI.Options.Visible == false and menuUI.Summary.Visible == false and menuUI.Spectate.Visible == false then
+			currentUI.Waiting.UI.Visible = currentUI.Waiting.Visible
+		end
 	end
+	run.Heartbeat:Wait()
 end)
 
 HUD.Options.MouseButton1Down:Connect(function()
