@@ -1561,6 +1561,8 @@ oldNewGui.Changed:connect(adjustGuis)
 run.Heartbeat:Connect(function()
 	StatsUI.Visible = currentUI.HUD.GameStats.Stats.Visible
 	MenuToggle.Air.Visible = currentUI.HUD.GameStats.Ingame.Visible
+	local str = tostring(currentUI.HUD.GameStats.Ingame.Info.Air.Count.Text)
+	local sub = str.gsub(str, "%D", "")
 	if StatsUI.Visible then
 		CoinAmt.Amount.Text = states.Currency.CoinAmt.Amount.Text
 		GemAmt.Amount.Text = states.Currency.GemAmt.Amount.Text
@@ -1571,8 +1573,6 @@ run.Heartbeat:Connect(function()
 		LoginStats.Days.Text = currentUI.HUD.GameStats.Stats.LoginStats.Days.Text
 		LoginStats.ProgressBar.Percentage.Size = currentUI.HUD.GameStats.Stats.LoginStats.ProgressBar.Percentage.Size
 	else
-		local str = tostring(currentUI.HUD.GameStats.Ingame.Info.Air.Count.Text)
-		local sub = str.gsub(str, "%D", "")
 		num = tonumber(sub)
 		MenuToggle.Air.BasicBar.Percentage.Size = currentUI.HUD.GameStats.Ingame.AirBars.BasicBar.Percentage.Size
 		MenuToggle.Air.BasicBar.Temp.Size = currentUI.HUD.GameStats.Ingame.AirBars.BasicBar.Temp.Size
