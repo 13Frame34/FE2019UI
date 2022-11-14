@@ -1586,26 +1586,26 @@ run.Heartbeat:Connect(function()
 		MenuToggle.Air.Buttons.Count.TextColor3 = currentUI.HUD.GameStats.Ingame.Info.Buttons.Count.TextColor3
 		MenuToggle.Air.PlayerCount.Count.Text = currentUI.HUD.GameStats.Ingame.Info.PlayerCount.Count.Text
 		MenuToggle.Air.PlayerCount.Count.TextColor3 = currentUI.HUD.GameStats.Ingame.Info.PlayerCount.Count.TextColor3
-		if num <= 100 and currentUI.HUD.GameStats.Ingame.Visible == true then
-			switchAir("air")
-			if currentUI.HUD.GameStats.Ingame.AirBars.DrainCount.Text ~= "-30/s" then
-				HUD.MenuToggle.Air.AirText.Text = "Air: " .. sub .. "/100"
-				HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 1, 1)
-			elseif currentUI.HUD.GameStats.Ingame.AirBars.DrainCount.Text == "-30/s" then
-				HUD.MenuToggle.Air.AirText.Text = "!CAUTION: ACID!"
-				HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 0, 0)
-			end
-		elseif num > 100 and currentUI.HUD.GameStats.Ingame.Visible == true then
-			switchAir("tank")
-			HUD.MenuToggle.Air.AirText.Text = "Tank: " .. sub - 100 .. "/300"
-			HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 1, 1)
-		end
-		if currentUI.HUD.GameStats.Stats.Visible == true then
-			switchAir("air")
-			currentUI.HUD.GameStats.Ingame.AirBars.DrainCount.Text = ""
+	end
+	if num <= 100 and currentUI.HUD.GameStats.Ingame.Visible == true then
+		switchAir("air")
+		if currentUI.HUD.GameStats.Ingame.AirBars.DrainCount.Text ~= "-30/s" then
 			HUD.MenuToggle.Air.AirText.Text = "Air: " .. sub .. "/100"
 			HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 1, 1)
+		elseif currentUI.HUD.GameStats.Ingame.AirBars.DrainCount.Text == "-30/s" then
+			HUD.MenuToggle.Air.AirText.Text = "!CAUTION: ACID!"
+			HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 0, 0)
 		end
+	elseif num > 100 and currentUI.HUD.GameStats.Ingame.Visible == true then
+		switchAir("tank")
+		HUD.MenuToggle.Air.AirText.Text = "Tank: " .. sub - 100 .. "/300"
+		HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 1, 1)
+	end
+	if currentUI.HUD.GameStats.Stats.Visible == true then
+		switchAir("air")
+		currentUI.HUD.GameStats.Ingame.AirBars.DrainCount.Text = ""
+		HUD.MenuToggle.Air.AirText.Text = "Air: " .. sub .. "/100"
+		HUD.MenuToggle.Air.AirText.TextColor3 = Color3.new(1, 1, 1)
 	end
 	if menuUI.Options.Visible == true then
 		HUD.Options.ImageRectOffset = Vector2.new(102,2)
